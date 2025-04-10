@@ -1,0 +1,16 @@
+services:
+  # Service name
+  mysql-db:
+    # Official Docker image with tag 9.2.0
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: temp1234!
+    ports:
+      - "3306:3306"
+    # Persists data after container shutdown
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ../db:/docker-entrypoint-initdb.d:ro
+
+volumes:
+  mysql_data:
