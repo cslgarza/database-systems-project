@@ -6,6 +6,82 @@ This project sets up a MySQL database using Docker. On first startup, it automat
 
 ## 🚀 Getting Started
 
+### Pre-requisites
+
+Docker
+Docker Compose
+
+If on Windows:
+
+Search for and install Docker Desktop.
+
+Afterwards, activating WSL is required:
+
+Open `Windows Powershell` and type:
+
+```
+wsl --install
+```
+
+Next, in the Windows Start Menu, look for `WSL` and open it.
+
+Click the dropdown and select Ubuntu.
+
+Run the following to set up Docker's `apt` repository:
+
+```
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+
+Run to install Docker packages:
+
+```
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+In the WSL terminal, try running `docker ps`. You might get a permission error. If you do:
+
+Create the docker group. You might get group docker already exists. That's fine. Just run the next command.
+```
+sudo groupadd docker
+
+sudo usermod -aG docker $USER
+```
+
+If using $USER doesn't work. use the User that you created when installing WSL, or just replace with what you get
+for `echo $USER`.
+
+In Docker Desktop, open settings on the top right and go to Resources.
+
+Click on `WSL Integration`.
+
+Enable Ubuntu intergration.
+
+Apply and restart.
+
+Close and re-open Docker Desktop if it doesn't restart on its own.
+
+### Clone the repo
+
+```
+git clone <ssh url you see when clicking the green clone button in the repo root page>
+```
+
+Cd into the repo root and continue.
+
+
 ### Start the Database
 
 ```bash
